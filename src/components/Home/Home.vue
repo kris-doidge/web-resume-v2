@@ -16,6 +16,17 @@
   <main>
     <TheWelcome />
   </main>
+  <footer>
+    <a
+      href="https://www.linkedin.com/in/kristopher-doidge-985119b5"
+      target="_blank"
+    >
+      <n-icon><LogoLinkedin /></n-icon>
+    </a>
+    <a href="https://github.com/kris-doidge/" target="_blank">
+      <n-icon><LogoGithub /></n-icon>
+    </a>
+  </footer>
 </template>
 
 <style scoped>
@@ -50,4 +61,11 @@ header {
 <script setup>
 import HelloWorld from "../HelloWorld.vue";
 import TheWelcome from "../TheWelcome.vue";
+import { NIcon } from "naive-ui";
+import { LogoLinkedin, LogoGithub } from "@vicons/ionicons5";
+// import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+// import { library } from "@fortawesome/fontawesome-svg-core";
+// import { faLinkedin, faEnvelope } from "@fortawesome/free-solid-svg-icons";
+
+// library.add(faLinkedin, faEnvelope);
 </script>
