@@ -30,6 +30,8 @@ const jobs = computed(() => {
         "Integrated third-party APIs to unify multiple external tools into a single platform, enabling seamless data synchronization and improved workflow efficiency.",
         "Contributed to the expansion and maintenance of an existing application built with JavaScript, Vue 2, Node.js, and PostgreSQL, adding and enhancing functionality, optimizing performance, and resolving technical debt.",
       ],
+      languages: ["ts", "js", "nestjs", "postgres", "vue", "docker"],
+      current: true,
     },
     {
       company: "InComm Inc",
@@ -43,6 +45,7 @@ const jobs = computed(() => {
         "Implemented functional tests on legacy .NET applications using MSTest v1 and v2, modernizing test strategies for existing systems.",
         "Collaborated closely with developers to identify and resolve defects early in the development lifecycle, improving software quality and deployment efficiency.",
       ],
+      languages: ["csharp", "selenium", "mstest", "react"],
     },
     {
       company: "Deloitte & Touche",
@@ -57,6 +60,7 @@ const jobs = computed(() => {
         "Create and implement testing strategies to maximize team member efficiency and throughput",
         "On-board and train team members on how to utilize back-end testing tools",
       ],
+      languages: ["postman", "sql", "ssms", "react", "csharp"],
     },
     {
       company: "AgileThought",
@@ -68,6 +72,7 @@ const jobs = computed(() => {
         "Facilitated defect triaging meetings with development team",
         "Strategically tested software using Swagger and Postman",
       ],
+      languages: ["postman", "sql", "ssms", "react", "csharp"],
     },
   ];
 });

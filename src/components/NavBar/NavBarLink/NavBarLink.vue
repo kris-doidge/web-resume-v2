@@ -1,6 +1,5 @@
 <template>
   <router-link :to="to" class="link" :class="{ active: isActiveRoute }">
-    <i class="icon" :class="icon" />
     <slot />
   </router-link>
 </template>

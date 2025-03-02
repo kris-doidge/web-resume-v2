@@ -27,12 +27,6 @@
 }
 
 html,
-body {
-  height: 100%;
-  width: 100%;
-  overflow: hidden; /* Ensures no scrollbars appear */
-}
-
 .layout {
   display: flex;
   flex-direction: column;

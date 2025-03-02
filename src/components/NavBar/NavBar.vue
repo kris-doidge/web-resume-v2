@@ -27,11 +27,9 @@
 </style>
 
 <script setup>
-import { NTabs, NTab, NTabPane } from "naive-ui";
 import { useRoute, useRouter } from "vue-router";
 import { ref } from "vue";
 import NavBarLink from "@/components/NavBar/NavBarLink/NavBarLink.vue";
-import { LogoLinkedin, LogoGithub } from "@vicons/ionicons5";
 
 const route = useRoute();
 const router = useRouter();
