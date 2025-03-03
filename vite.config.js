@@ -12,4 +12,8 @@ export default defineConfig({
       "@": fileURLToPath(new URL("./src", import.meta.url)),
     },
   },
+  base: "/",
+  server: {
+    historyApiFallback: true, // Ensures client-side routing works
+  },
 });

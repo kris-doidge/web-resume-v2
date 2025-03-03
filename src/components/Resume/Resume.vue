@@ -1,10 +1,6 @@
 <template>
-  <!--  Need to add an isMobile check here, if mobile, stack them. otherwise, display full-->
   <div class="programming-container">
     <div class="programming-card">
-      <!--      <div style="justify-content: center">-->
-      <!--        <span>Languages</span>-->
-      <!--      </div>-->
       <h1>Languages</h1>
       <br />
       <IconCard
@@ -57,6 +53,8 @@
       >
       </IconCard>
     </div>
+  </div>
+  <div>
     <JobCard
       v-for="job in jobs"
       :key="job.title"
@@ -66,6 +64,9 @@
       :dates="job.dates"
       :description="job.description"
       :location="job.location"
+      :tools="job.tools"
+      :frameworks="job.frameworks"
+      :languages="job.languages"
     />
   </div>
 </template>
@@ -122,6 +123,11 @@
 import { computed } from "vue";
 import JobCard from "@/components/Resume/JobCard/JobCard.vue";
 import IconCard from "@/components/@base/IconCard.vue";
+import {
+  programmingFrameworks,
+  programmingLanguages,
+  programmingTools,
+} from "@/utils/constants";
 
 const jobs = computed(() => {
   return [
@@ -137,7 +143,7 @@ const jobs = computed(() => {
         "Contributed to the expansion and maintenance of an existing application built with JavaScript, Vue 2, Node.js, and PostgreSQL, adding and enhancing functionality, optimizing performance, and resolving technical debt.",
       ],
       languages: ["ts", "js"],
-      frameworks: ["vue3", "vue2", "postgres", "nestjs", "node"],
+      frameworks: ["vue3", "vue2", "postgres", "nestjs", "node", "prisma"],
       tools: ["git", "docker", "postman", "jetbrains", "azuredevops"],
       current: true,
     },
@@ -201,50 +207,5 @@ const containsProgrammingLanguages = computed(() => {
 
 const containsProgrammingFrameworks = computed(() => {
   return [...new Set(jobs.value.flatMap((job) => job.frameworks))];
-});
-
-const programmingLanguages = computed(() => {
-  return {
-    ts: { text: "Typescript", icon: "devicon-typescript-plain" },
-    js: { text: "Javascript", icon: "devicon-javascript-plain" },
-    html: { text: "HTML", icon: "devicon-html5-plain" },
-    css: { text: "CSS", icon: "devicon-css3-plain" },
-    sass: { text: "SASS", icon: "devicon-sass-original" },
-    java: { text: "Java", icon: "devicon-java-plain" },
-    python: { text: "Python", icon: "devicon-python-plain" },
-    c: { text: "C", icon: "devicon-c-plain" },
-    csharp: { text: "C#", icon: "devicon-csharp-plain" },
-    sql: { text: "SQL", icon: "devicon-mysql-plain" },
-  };
-});
-
-const programmingTools = computed(() => {
-  return {
-    git: { text: "Git", icon: "devicon-git-plain" },
-    github: { text: "Github", icon: "devicon-github-plain" },
-    azuredevops: { text: "Azure", icon: "devicon-azuredevops-plain" },
-    docker: { text: "Docker", icon: "devicon-docker-plain" },
-    jenkins: { text: "Jenkins", icon: "devicon-jenkins-plain" },
-    vscode: { text: "VSCode", icon: "devicon-visualstudio-plain" },
-    ssms: { text: "SSMS", icon: "devicon-microsoftsqlserver-plain" },
-    postman: { text: "Postman", icon: "devicon-postman-plain" },
-    jetbrains: { text: "JetBrains", icon: "devicon-jetbrains-plain" },
-    visualstudio: { text: "VisualStudio", icon: "devicon-visualstudio-plain" },
-  };
-});
-const programmingFrameworks = computed(() => {
-  return {
-    node: { text: "Node.js", icon: "devicon-nodejs-plain" },
-    dotnet: { text: ".NET", icon: "devicon-dot-net-plain" },
-    nestjs: { text: "NestJs", icon: "devicon-nestjs-plain" },
-    xunit: { text: "XUnit", icon: "devicon-xunit-plain" },
-    mstest: { text: "MSTest", icon: "devicon-visualstudio-plain" },
-    react: { text: "React", icon: "devicon-react-original" },
-    nunit: { text: "NUnit", icon: "devicon-nunit-plain" },
-    selenium: { text: "Selenium", icon: "devicon-selenium-plain" },
-    postgres: { text: "Postgresql", icon: "devicon-postgresql-plain" },
-    vue2: { text: "Vue2", icon: "devicon-vuejs-plain" },
-    vue3: { text: "Vue3", icon: "devicon-vuejs-plain" },
-  };
 });
 </script>
