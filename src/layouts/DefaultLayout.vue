@@ -13,10 +13,15 @@
   --topnav-item-hover: #2c5a80;
   --topnav-item-active: #3d7db3;
 
-  --primary-color: #121e2b;
-  --secondary-color: #243b55;
-  --accent-color: #a4c8e1;
-  --text-color: #f0f5fa;
+  --primary-color: #121e2b; /* Dark Navy */
+  --secondary-color: #243b55; /* Deep Blue */
+  --accent-color: #a4c8e1; /* Soft Blue */
+  --text-color: #f0f5fa; /* Light Grayish Blue */
+
+  --highlight-color: #5a96c9; /* Mid-tone Blue  A more vibrant accent to draw attention without overpowering.*/
+  --success-color: #3aaf69; /* Muted Green  A calming green that contrasts well with your blues.*/
+  --warning-color: #e4b363; /* Soft Gold A warm gold to balance the cool palette.*/
+  --error-color: #d9534f; /* Warm Red A warm red for alerts, maintaining readability.*/
 }
 </style>
 <style scoped>

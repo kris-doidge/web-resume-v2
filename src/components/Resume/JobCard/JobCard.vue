@@ -6,8 +6,8 @@
     <!--    </div>-->
     <div>
       <div class="job-card-header">
-        <div style="font-weight: bold">
-          <span>{{ company }}</span>
+        <div>
+          <span style="font-weight: bold">{{ company }}</span>
           <div v-if="current" class="chip">Current</div>
         </div>
         <span style="font-style: italic">{{ dates }}</span>
@@ -24,12 +24,37 @@
         </ul>
       </div>
       <div class="job-card-footer">
-        <i
-          v-for="(language, index) in languages || []"
-          :key="index"
-          :class="`${programmingLanguagesIcons[language]} colored footer-language`"
-        >
-        </i>
+        <!--        <i-->
+        <!--          v-for="(language, index) in languages || []"-->
+        <!--          :key="index"-->
+        <!--          :class="`${programmingLanguages[language]} colored footer-language`"-->
+        <!--        >-->
+        <!--        </i>-->
+        <div>
+          <i
+            v-for="(language, index) in languages || []"
+            :key="index"
+            class="chip chip-language"
+          >
+            {{
+              (programmingLanguages[language] &&
+                programmingLanguages[language].text) ||
+              "Missing Language"
+            }}
+          </i>
+        </div>
+        <div style="padding-top: 5px">
+          <i
+            v-for="(tool, index) in tools || []"
+            :key="index"
+            class="chip chip-tool"
+          >
+            {{
+              (programmingTools[tool] && programmingTools[tool].text) ||
+              "Missing Language"
+            }}
+          </i>
+        </div>
       </div>
     </div>
   </div>
@@ -64,13 +89,36 @@
 .chip {
   display: inline-flex;
   align-items: center;
-  background-color: var(--accent-color);
   border-radius: 16px;
   padding: 8px 12px;
   margin-left: 10px;
-  font-size: 12px;
+  font-size: 14px;
   font-family: Arial, sans-serif;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.9;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+.chip-language {
   color: var(--secondary-color);
+  background-color: var(--highlight-color);
+  box-shadow: 0px 4px 8px rgba(164, 200, 225, 0.6); /* Light accent glow */
+  border: 2px solid var(--accent-color);
+}
+.chip-tool {
+  color: var(--secondary-color);
+  background-color: var(--accent-color);
 }
 .chip .close {
   margin-left: 8px;
@@ -106,36 +154,49 @@ const props = defineProps<{
   dates: String;
   description: Array<String>;
   languages?: Array<String>;
+  tools?: Array<String>;
   current?: boolean;
 }>();
 
 const showCard = ref(false);
 
-const programmingLanguagesIcons = computed(() => {
+const programmingLanguages = computed(() => {
   return {
-    ts: "devicon-typescript-plain",
-    js: "devicon-javascript-plain",
-    vue: "devicon-vuejs-plain",
-    html: "devicon-html5-plain",
-    css: "devicon-css3-plain",
-    sass: "devicon-sass-original",
-    less: "devicon-less-plain",
-    java: "devicon-java-plain",
-    python: "devicon-python-plain",
-    c: "devicon-c-plain",
-    node: "devicon-nodejs-plain",
-    nestjs: "devicon-nestjs-plain",
-    docker: "devicon-docker-plain",
-    postgres: "devicon-postgresql-plain",
-    csharp: "devicon-csharp-plain",
-    xunit: "devicon-xunit-plain",
-    mstest: "devicon-visualstudio-plain",
-    react: "devicon-react-original",
-    nunit: "devicon-nunit-plain",
-    selenium: "devicon-selenium-plain",
-    sql: "devicon-mysql-plain",
-    ssms: "devicon-microsoftsqlserver-plain",
-    postman: "devicon-postman-plain",
+    ts: { text: "Typescript", icon: "devicon-typescript-plain" },
+    js: { text: "Javascript", icon: "devicon-javascript-plain" },
+    vue2: { text: "Vue2", icon: "devicon-vuejs-plain" },
+    vue3: { text: "Vue3", icon: "devicon-vuejs-plain" },
+    html: { text: "HTML", icon: "devicon-html5-plain" },
+    css: { text: "CSS", icon: "devicon-css3-plain" },
+    sass: { text: "SASS", icon: "devicon-sass-original" },
+    java: { text: "Java", icon: "devicon-java-plain" },
+    python: { text: "Python", icon: "devicon-python-plain" },
+    c: { text: "C", icon: "devicon-c-plain" },
+    node: { text: "Node.js", icon: "devicon-nodejs-plain" },
+    nestjs: { text: "NestJs", icon: "devicon-nestjs-plain" },
+    postgres: { text: "Postgresql", icon: "devicon-postgresql-plain" },
+    csharp: { text: "C#", icon: "devicon-csharp-plain" },
+    xunit: { text: "XUnit", icon: "devicon-xunit-plain" },
+    mstest: { text: "MSTest", icon: "devicon-visualstudio-plain" },
+    react: { text: "React", icon: "devicon-react-original" },
+    nunit: { text: "NUnit", icon: "devicon-nunit-plain" },
+    selenium: { text: "Selenium", icon: "devicon-selenium-plain" },
+    sql: { text: "SQL", icon: "devicon-mysql-plain" },
+  };
+});
+
+const programmingTools = computed(() => {
+  return {
+    git: { text: "Git", icon: "devicon-git-plain" },
+    github: { text: "Github", icon: "devicon-github-plain" },
+    azure: { text: "Azure", icon: "devicon-microsoftazure-plain" },
+    docker: { text: "Docker", icon: "devicon-docker-plain" },
+    jenkins: { text: "Jenkins", icon: "devicon-jenkins-plain" },
+    vscode: { text: "VSCode", icon: "devicon-visualstudio-plain" },
+    ssms: { text: "SSMS", icon: "devicon-microsoftsqlserver-plain" },
+    postman: { text: "Postman", icon: "devicon-postman-plain" },
+    jetbrains: { text: "JetBrains", icon: "devicon-jetbrains-plain" },
+    visualstudio: { text: "VisualStudio", icon: "devicon-visualstudio-plain" },
   };
 });
 </script>

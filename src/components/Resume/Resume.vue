@@ -1,4 +1,25 @@
 <template>
+  <div class="programming-container">
+    <div class="programming-card">
+      <!--      <div style="justify-content: center">-->
+      <!--        <span>Languages</span>-->
+      <!--      </div>-->
+      <i
+        v-for="(language, index) in containsProgrammingLanguages || []"
+        :key="index"
+        :class="`${programmingLanguages[language] ? programmingLanguages[language].icon : ''} colored footer-language`"
+      >
+      </i>
+    </div>
+    <div class="programming-card standout">
+      <i
+        v-for="(tool, index) in containsProgrammingTools || []"
+        :key="index"
+        :class="`${programmingTools[tool] ? programmingTools[tool].icon : ''} colored footer-language`"
+      >
+      </i>
+    </div>
+  </div>
   <JobCard
     v-for="job in jobs"
     :key="job.title"
@@ -11,7 +32,33 @@
   />
 </template>
 
-<style scoped></style>
+<style scoped>
+.programming-container {
+  display: flex;
+  gap: 20px; /* Space between the cards */
+  justify-content: center; /* Center the cards */
+}
+
+.programming-card {
+  width: 100%;
+  background-color: var(--secondary-color);
+  border: 1px solid var(--accent-color);
+  border-radius: 10px;
+  margin-bottom: 10px;
+  padding: 5px 5px 5px;
+}
+
+.standout {
+  background-color: var(--accent-color);
+  color: var(--primary-color);
+  font-weight: bold;
+}
+
+.footer-language {
+  font-size: 64px;
+  padding: 5px 5px 5px;
+}
+</style>
 
 <script setup lang="ts">
 import { computed } from "vue";
@@ -31,6 +78,7 @@ const jobs = computed(() => {
         "Contributed to the expansion and maintenance of an existing application built with JavaScript, Vue 2, Node.js, and PostgreSQL, adding and enhancing functionality, optimizing performance, and resolving technical debt.",
       ],
       languages: ["ts", "js", "nestjs", "postgres", "vue", "docker"],
+      tools: ["git", "docker", "postman", "jetbrains"],
       current: true,
     },
     {
@@ -46,6 +94,7 @@ const jobs = computed(() => {
         "Collaborated closely with developers to identify and resolve defects early in the development lifecycle, improving software quality and deployment efficiency.",
       ],
       languages: ["csharp", "selenium", "mstest", "react"],
+      tools: [],
     },
     {
       company: "Deloitte & Touche",
@@ -61,6 +110,7 @@ const jobs = computed(() => {
         "On-board and train team members on how to utilize back-end testing tools",
       ],
       languages: ["postman", "sql", "ssms", "react", "csharp"],
+      tools: [],
     },
     {
       company: "AgileThought",
@@ -73,7 +123,56 @@ const jobs = computed(() => {
         "Strategically tested software using Swagger and Postman",
       ],
       languages: ["postman", "sql", "ssms", "react", "csharp"],
+      tools: [],
     },
   ];
+});
+
+const containsProgrammingTools = computed(() => {
+  return [...new Set(jobs.value.flatMap((job) => job.tools))];
+});
+
+const containsProgrammingLanguages = computed(() => {
+  return [...new Set(jobs.value.flatMap((job) => job.languages))];
+});
+
+const programmingLanguages = computed(() => {
+  return {
+    ts: { text: "Typescript", icon: "devicon-typescript-plain" },
+    js: { text: "Javascript", icon: "devicon-javascript-plain" },
+    vue2: { text: "Vue2", icon: "devicon-vuejs-plain" },
+    vue3: { text: "Vue3", icon: "devicon-vuejs-plain" },
+    html: { text: "HTML", icon: "devicon-html5-plain" },
+    css: { text: "CSS", icon: "devicon-css3-plain" },
+    sass: { text: "SASS", icon: "devicon-sass-original" },
+    java: { text: "Java", icon: "devicon-java-plain" },
+    python: { text: "Python", icon: "devicon-python-plain" },
+    c: { text: "C", icon: "devicon-c-plain" },
+    node: { text: "Node.js", icon: "devicon-nodejs-plain" },
+    nestjs: { text: "NestJs", icon: "devicon-nestjs-plain" },
+    postgres: { text: "Postgresql", icon: "devicon-postgresql-plain" },
+    csharp: { text: "C#", icon: "devicon-csharp-plain" },
+    xunit: { text: "XUnit", icon: "devicon-xunit-plain" },
+    mstest: { text: "MSTest", icon: "devicon-visualstudio-plain" },
+    react: { text: "React", icon: "devicon-react-original" },
+    nunit: { text: "NUnit", icon: "devicon-nunit-plain" },
+    selenium: { text: "Selenium", icon: "devicon-selenium-plain" },
+    sql: { text: "SQL", icon: "devicon-mysql-plain" },
+  };
+});
+
+const programmingTools = computed(() => {
+  return {
+    git: { text: "Git", icon: "devicon-git-plain" },
+    github: { text: "Github", icon: "devicon-github-plain" },
+    azure: { text: "Azure", icon: "devicon-microsoftazure-plain" },
+    docker: { text: "Docker", icon: "devicon-docker-plain" },
+    jenkins: { text: "Jenkins", icon: "devicon-jenkins-plain" },
+    vscode: { text: "VSCode", icon: "devicon-visualstudio-plain" },
+    ssms: { text: "SSMS", icon: "devicon-microsoftsqlserver-plain" },
+    postman: { text: "Postman", icon: "devicon-postman-plain" },
+    jetbrains: { text: "JetBrains", icon: "devicon-jetbrains-plain" },
+    visualstudio: { text: "VisualStudio", icon: "devicon-visualstudio-plain" },
+  };
 });
 </script>
