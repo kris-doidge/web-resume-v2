@@ -1,35 +1,73 @@
 <template>
+  <!--  Need to add an isMobile check here, if mobile, stack them. otherwise, display full-->
   <div class="programming-container">
     <div class="programming-card">
       <!--      <div style="justify-content: center">-->
       <!--        <span>Languages</span>-->
       <!--      </div>-->
-      <i
+      <h1>Languages</h1>
+      <br />
+      <IconCard
         v-for="(language, index) in containsProgrammingLanguages || []"
         :key="index"
-        :class="`${programmingLanguages[language] ? programmingLanguages[language].icon : ''} colored footer-language`"
+        :icon="
+          programmingLanguages[language]
+            ? programmingLanguages[language].icon
+            : ''
+        "
+        :text="
+          programmingLanguages[language]
+            ? programmingLanguages[language].text
+            : 'Missing Language'
+        "
       >
-      </i>
+      </IconCard>
     </div>
     <div class="programming-card standout">
-      <i
-        v-for="(tool, index) in containsProgrammingTools || []"
+      <h1>Frameworks</h1>
+      <IconCard
+        v-for="(language, index) in containsProgrammingFrameworks || []"
         :key="index"
-        :class="`${programmingTools[tool] ? programmingTools[tool].icon : ''} colored footer-language`"
+        :icon="
+          programmingFrameworks[language]
+            ? programmingFrameworks[language].icon
+            : ''
+        "
+        :text="
+          programmingFrameworks[language]
+            ? programmingFrameworks[language].text
+            : language
+        "
       >
-      </i>
+      </IconCard>
     </div>
+    <div class="programming-card standout">
+      <h1>Tools</h1>
+      <IconCard
+        v-for="(language, index) in containsProgrammingTools || []"
+        :key="index"
+        :icon="
+          programmingTools[language] ? programmingTools[language].icon : ''
+        "
+        :text="
+          programmingTools[language]
+            ? programmingTools[language].text
+            : 'Missing Tool'
+        "
+      >
+      </IconCard>
+    </div>
+    <JobCard
+      v-for="job in jobs"
+      :key="job.title"
+      v-bind="job"
+      :company="job.company"
+      :title="job.title"
+      :dates="job.dates"
+      :description="job.description"
+      :location="job.location"
+    />
   </div>
-  <JobCard
-    v-for="job in jobs"
-    :key="job.title"
-    v-bind="job"
-    :company="job.company"
-    :title="job.title"
-    :dates="job.dates"
-    :description="job.description"
-    :location="job.location"
-  />
 </template>
 
 <style scoped>
@@ -37,6 +75,8 @@
   display: flex;
   gap: 20px; /* Space between the cards */
   justify-content: center; /* Center the cards */
+  flex-wrap: wrap;
+  width: 100%;
 }
 
 .programming-card {
@@ -46,6 +86,11 @@
   border-radius: 10px;
   margin-bottom: 10px;
   padding: 5px 5px 5px;
+  display: flex;
+  flex-wrap: wrap; /* Ensure icons wrap instead of overflowing */
+  gap: 10px; /* Space between icons */
+  justify-content: center; /* Center icons inside the card */
+  max-width: 30%; /* Set a max width for wrapping */
 }
 
 .standout {
@@ -58,11 +103,25 @@
   font-size: 64px;
   padding: 5px 5px 5px;
 }
+
+@media (max-width: 768px) {
+  .programming-container {
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Center items when stacked */
+    gap: 10px; /* Reduce gap for better spacing */
+  }
+
+  .programming-card {
+    max-width: 90%; /* Allow cards to scale down */
+    padding: 15px;
+  }
+}
 </style>
 
 <script setup lang="ts">
 import { computed } from "vue";
 import JobCard from "@/components/Resume/JobCard/JobCard.vue";
+import IconCard from "@/components/@base/IconCard.vue";
 
 const jobs = computed(() => {
   return [
@@ -77,8 +136,9 @@ const jobs = computed(() => {
         "Integrated third-party APIs to unify multiple external tools into a single platform, enabling seamless data synchronization and improved workflow efficiency.",
         "Contributed to the expansion and maintenance of an existing application built with JavaScript, Vue 2, Node.js, and PostgreSQL, adding and enhancing functionality, optimizing performance, and resolving technical debt.",
       ],
-      languages: ["ts", "js", "nestjs", "postgres", "vue", "docker"],
-      tools: ["git", "docker", "postman", "jetbrains"],
+      languages: ["ts", "js"],
+      frameworks: ["vue3", "vue2", "postgres", "nestjs", "node"],
+      tools: ["git", "docker", "postman", "jetbrains", "azuredevops"],
       current: true,
     },
     {
@@ -93,8 +153,9 @@ const jobs = computed(() => {
         "Implemented functional tests on legacy .NET applications using MSTest v1 and v2, modernizing test strategies for existing systems.",
         "Collaborated closely with developers to identify and resolve defects early in the development lifecycle, improving software quality and deployment efficiency.",
       ],
-      languages: ["csharp", "selenium", "mstest", "react"],
-      tools: [],
+      languages: ["csharp", "js", "sql"],
+      frameworks: ["xunit", "mstest", "nunit", "selenium", "react", "dotnet"],
+      tools: ["postman", "git", "visualstudio", "azuredevops"],
     },
     {
       company: "Deloitte & Touche",
@@ -109,8 +170,9 @@ const jobs = computed(() => {
         "Create and implement testing strategies to maximize team member efficiency and throughput",
         "On-board and train team members on how to utilize back-end testing tools",
       ],
-      languages: ["postman", "sql", "ssms", "react", "csharp"],
-      tools: [],
+      languages: ["sql", "csharp"],
+      frameworks: ["react", "dotnet"],
+      tools: ["postman", "ssms", "azuredevops", "visualstudio"],
     },
     {
       company: "AgileThought",
@@ -122,8 +184,9 @@ const jobs = computed(() => {
         "Facilitated defect triaging meetings with development team",
         "Strategically tested software using Swagger and Postman",
       ],
-      languages: ["postman", "sql", "ssms", "react", "csharp"],
-      tools: [],
+      languages: ["sql", "csharp"],
+      frameworks: ["react", "dotnet"],
+      tools: ["postman", "ssms", "azuredevops", "visualstudio"],
     },
   ];
 });
@@ -136,27 +199,21 @@ const containsProgrammingLanguages = computed(() => {
   return [...new Set(jobs.value.flatMap((job) => job.languages))];
 });
 
+const containsProgrammingFrameworks = computed(() => {
+  return [...new Set(jobs.value.flatMap((job) => job.frameworks))];
+});
+
 const programmingLanguages = computed(() => {
   return {
     ts: { text: "Typescript", icon: "devicon-typescript-plain" },
     js: { text: "Javascript", icon: "devicon-javascript-plain" },
-    vue2: { text: "Vue2", icon: "devicon-vuejs-plain" },
-    vue3: { text: "Vue3", icon: "devicon-vuejs-plain" },
     html: { text: "HTML", icon: "devicon-html5-plain" },
     css: { text: "CSS", icon: "devicon-css3-plain" },
     sass: { text: "SASS", icon: "devicon-sass-original" },
     java: { text: "Java", icon: "devicon-java-plain" },
     python: { text: "Python", icon: "devicon-python-plain" },
     c: { text: "C", icon: "devicon-c-plain" },
-    node: { text: "Node.js", icon: "devicon-nodejs-plain" },
-    nestjs: { text: "NestJs", icon: "devicon-nestjs-plain" },
-    postgres: { text: "Postgresql", icon: "devicon-postgresql-plain" },
     csharp: { text: "C#", icon: "devicon-csharp-plain" },
-    xunit: { text: "XUnit", icon: "devicon-xunit-plain" },
-    mstest: { text: "MSTest", icon: "devicon-visualstudio-plain" },
-    react: { text: "React", icon: "devicon-react-original" },
-    nunit: { text: "NUnit", icon: "devicon-nunit-plain" },
-    selenium: { text: "Selenium", icon: "devicon-selenium-plain" },
     sql: { text: "SQL", icon: "devicon-mysql-plain" },
   };
 });
@@ -165,7 +222,7 @@ const programmingTools = computed(() => {
   return {
     git: { text: "Git", icon: "devicon-git-plain" },
     github: { text: "Github", icon: "devicon-github-plain" },
-    azure: { text: "Azure", icon: "devicon-microsoftazure-plain" },
+    azuredevops: { text: "Azure", icon: "devicon-azuredevops-plain" },
     docker: { text: "Docker", icon: "devicon-docker-plain" },
     jenkins: { text: "Jenkins", icon: "devicon-jenkins-plain" },
     vscode: { text: "VSCode", icon: "devicon-visualstudio-plain" },
@@ -173,6 +230,21 @@ const programmingTools = computed(() => {
     postman: { text: "Postman", icon: "devicon-postman-plain" },
     jetbrains: { text: "JetBrains", icon: "devicon-jetbrains-plain" },
     visualstudio: { text: "VisualStudio", icon: "devicon-visualstudio-plain" },
+  };
+});
+const programmingFrameworks = computed(() => {
+  return {
+    node: { text: "Node.js", icon: "devicon-nodejs-plain" },
+    dotnet: { text: ".NET", icon: "devicon-dot-net-plain" },
+    nestjs: { text: "NestJs", icon: "devicon-nestjs-plain" },
+    xunit: { text: "XUnit", icon: "devicon-xunit-plain" },
+    mstest: { text: "MSTest", icon: "devicon-visualstudio-plain" },
+    react: { text: "React", icon: "devicon-react-original" },
+    nunit: { text: "NUnit", icon: "devicon-nunit-plain" },
+    selenium: { text: "Selenium", icon: "devicon-selenium-plain" },
+    postgres: { text: "Postgresql", icon: "devicon-postgresql-plain" },
+    vue2: { text: "Vue2", icon: "devicon-vuejs-plain" },
+    vue3: { text: "Vue3", icon: "devicon-vuejs-plain" },
   };
 });
 </script>

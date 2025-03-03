@@ -1,9 +1,9 @@
 <template>
   <div>
     <div class="navbar">
-      <NavBarLink to="/">Home</NavBarLink>
-      <NavBarLink to="/resume">Resume</NavBarLink>
-      <NavBarLink to="/about-me">About Me</NavBarLink>
+      <NavBarLink to="home">Home</NavBarLink>
+      <NavBarLink to="resume">Resume</NavBarLink>
+      <NavBarLink to="aboutMe">About Me</NavBarLink>
     </div>
   </div>
 </template>

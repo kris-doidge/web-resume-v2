@@ -1,5 +1,9 @@
 <template>
-  <router-link :to="to" class="link" :class="{ active: isActiveRoute }">
+  <router-link
+    :to="{ name: to }"
+    class="link"
+    :class="{ active: isActiveRoute }"
+  >
     <slot />
   </router-link>
 </template>
@@ -44,5 +48,5 @@ const props = defineProps({
 });
 
 const route = useRoute();
-const isActiveRoute = computed(() => route.path === props.to);
+const isActiveRoute = computed(() => route.name === props.to);
 </script>
