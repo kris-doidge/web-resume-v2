@@ -1,9 +1,9 @@
 <template>
   <div>
     <div class="navbar">
-      <NavBarLink to="home" :icon="LogoLinkedin.name">Home</NavBarLink>
-      <NavBarLink to="resume" :icon="LogoLinkedin.name">Resume</NavBarLink>
-      <NavBarLink to="about-me" :icon="LogoLinkedin.name">About Me</NavBarLink>
+      <NavBarLink to="/">Home</NavBarLink>
+      <NavBarLink to="/resume">Resume</NavBarLink>
+      <NavBarLink to="/about-me">About Me</NavBarLink>
     </div>
   </div>
 </template>

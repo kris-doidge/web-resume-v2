@@ -38,7 +38,7 @@ html,
   flex: 1;
   margin-top: 60px; /* Ensures it's not hidden under the navbar */
   width: 100%;
-  padding: 20px;
+  padding: 30px;
   background-color: #121e2b;
 }
 </style>

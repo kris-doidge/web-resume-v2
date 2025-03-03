@@ -41,7 +41,6 @@ import { useRoute } from "vue-router";
 
 const props = defineProps({
   to: String,
-  icon: String,
 });
 
 const route = useRoute();

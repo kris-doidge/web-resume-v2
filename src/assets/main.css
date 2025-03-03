@@ -1,4 +1,6 @@
 @import "./base.css";
+@import "@fontsource/inter";
+@import "@fontsource/inter/600.css";
 
 #app {
   height: 100%;
@@ -25,6 +27,7 @@ a,
   body {
     overflow-x: hidden; /* Disable horizontal scroll */
     overflow-y: auto;   /* Allow vertical scroll */
+    font-family: "Inter", sans-serif;
   }
 
 
