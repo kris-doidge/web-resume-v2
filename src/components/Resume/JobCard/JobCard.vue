@@ -1,9 +1,5 @@
 <template>
   <div class="job-card">
-    <!--    <div class="job-card-header">-->
-    <!--      <span>{{ title }} - {{ company }}</span>-->
-    <!--      <span style="font-style: italic">{{ dates }}</span>-->
-    <!--    </div>-->
     <div>
       <div class="job-card-header">
         <div>
@@ -120,14 +116,14 @@
 .chip-language {
   color: var(--secondary-color);
   background-color: var(--highlight-color);
-  box-shadow: 0px 4px 8px rgba(164, 200, 225, 0.6); /* Light accent glow */
+  box-shadow: 0 4px 8px rgba(164, 200, 225, 0.6); /* Light accent glow */
   border: 2px solid var(--accent-color);
 }
 .chip-tool {
   color: var(--secondary-color);
   background-color: var(--accent-color);
 }
-.chip .close {
+.chip {
   margin-left: 8px;
   cursor: pointer;
   background: none;
@@ -135,18 +131,13 @@
   font-size: 16px;
   color: #666;
 }
-.chip .close:hover {
+.chip :hover {
   color: #000;
 }
 
 .job-card-footer {
   padding: 5px 5px 5px;
   margin-bottom: 5px;
-}
-
-.footer-language {
-  font-size: 32px;
-  padding: 5px 5px 5px;
 }
 </style>
 

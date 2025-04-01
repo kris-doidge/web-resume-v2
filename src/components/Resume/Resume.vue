@@ -1,58 +1,20 @@
 <template>
   <div class="programming-container">
-    <div class="programming-card">
-      <h1>Languages</h1>
-      <br />
-      <IconCard
-        v-for="(language, index) in containsProgrammingLanguages || []"
-        :key="index"
-        :icon="
-          programmingLanguages[language]
-            ? programmingLanguages[language].icon
-            : ''
-        "
-        :text="
-          programmingLanguages[language]
-            ? programmingLanguages[language].text
-            : 'Missing Language'
-        "
-      >
-      </IconCard>
-    </div>
-    <div class="programming-card standout">
-      <h1>Frameworks</h1>
-      <IconCard
-        v-for="(language, index) in containsProgrammingFrameworks || []"
-        :key="index"
-        :icon="
-          programmingFrameworks[language]
-            ? programmingFrameworks[language].icon
-            : ''
-        "
-        :text="
-          programmingFrameworks[language]
-            ? programmingFrameworks[language].text
-            : language
-        "
-      >
-      </IconCard>
-    </div>
-    <div class="programming-card standout">
-      <h1>Tools</h1>
-      <IconCard
-        v-for="(language, index) in containsProgrammingTools || []"
-        :key="index"
-        :icon="
-          programmingTools[language] ? programmingTools[language].icon : ''
-        "
-        :text="
-          programmingTools[language]
-            ? programmingTools[language].text
-            : 'Missing Tool'
-        "
-      >
-      </IconCard>
-    </div>
+    <ToolCard
+      :items="containsProgrammingLanguages"
+      title="Programming Languages"
+      type="programmingLanguages"
+    />
+    <ToolCard
+      :items="containsProgrammingFrameworks"
+      title="Frameworks"
+      type="programmingFrameworks"
+    />
+    <ToolCard
+      :items="containsProgrammingTools"
+      title="Tools"
+      type="programmingTools"
+    />
   </div>
   <div>
     <JobCard
@@ -80,41 +42,11 @@
   width: 100%;
 }
 
-.programming-card {
-  width: 100%;
-  background-color: var(--secondary-color);
-  border: 1px solid var(--accent-color);
-  border-radius: 10px;
-  margin-bottom: 10px;
-  padding: 5px 5px 5px;
-  display: flex;
-  flex-wrap: wrap; /* Ensure icons wrap instead of overflowing */
-  gap: 10px; /* Space between icons */
-  justify-content: center; /* Center icons inside the card */
-  max-width: 30%; /* Set a max width for wrapping */
-}
-
-.standout {
-  background-color: var(--accent-color);
-  color: var(--primary-color);
-  font-weight: bold;
-}
-
-.footer-language {
-  font-size: 64px;
-  padding: 5px 5px 5px;
-}
-
 @media (max-width: 768px) {
   .programming-container {
     flex-direction: column; /* Stack items vertically */
     align-items: center; /* Center items when stacked */
     gap: 10px; /* Reduce gap for better spacing */
-  }
-
-  .programming-card {
-    max-width: 90%; /* Allow cards to scale down */
-    padding: 15px;
   }
 }
 </style>
@@ -122,12 +54,7 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import JobCard from "@/components/Resume/JobCard/JobCard.vue";
-import IconCard from "@/components/@base/IconCard.vue";
-import {
-  programmingFrameworks,
-  programmingLanguages,
-  programmingTools,
-} from "@/utils/constants";
+import ToolCard from "./ToolCard/ToolCard.vue";
 
 const jobs = computed(() => {
   return [

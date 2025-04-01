@@ -10,11 +10,8 @@
   display: flex;
   flex-direction: column; /* Stack icon above text */
   align-items: center; /* Center content horizontally */
-  justify-content: center; /* Center content vertically */
   width: 100px; /* Set a fixed or max width */
   height: 120px; /* Define the height of the card */
-  text-align: center; /* Ensure text is centered */
-  border: 1px solid var(--accent-color);
   border-radius: 5px;
 }
 
@@ -31,6 +28,8 @@
 .icon-card span {
   display: block; /* Ensure text stays below */
   font-size: 1rem;
+  padding: 5px 5px;
+  color: var(--accent-color);
 }
 </style>
 
